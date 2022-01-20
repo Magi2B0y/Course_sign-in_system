@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<title>result</title>
+
+<body style="text-align: center;margin: 0 auto;" >
+  <!-- bgcolor=#F3F2EE -->
+  </br></br></br>
+  <div><h2>One last step!</h2><h3>Enter the suggestion if you want<br>and press the button to submit<br>your sign in information.</h3></div>
+  <textarea id="suggestion" type="text" placeholder="Your suggestion here."
+    style=" width: 250px; height: 125px"></textarea><br /><br />
+    <!-- background-color:#F3F2EE; -->
+  <button style="width: 100px; height: 30px" onclick="submit()">Submit</button>
+  <script>
+    function submit() {
+      var suggestion = document.getElementById("suggestion").value;
+      url = "process.php?suggestion=" + suggestion;
+      var req = new XMLHttpRequest();
+      req.open("GET", url, true);
+      req.send(null);
+      req.onreadystatechange = function () {
+        if (req.status == 200 && req.readyState == 4) {
+          //alert(req.responseText);
+          //alert(req.responseText);
+          self.location.href = "feedback.html";
+
+        } else {
+          //alert("Try again.");
+        }
+      };
+    }
+  </script>
+</body>

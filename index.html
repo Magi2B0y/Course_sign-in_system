@@ -1,0 +1,43 @@
+<!DOCTYPE>
+
+<head>
+  <title>Scan the QR code</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <script type="text/javascript" src="//cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="//static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+</head>
+
+<body style="text-align: center;margin: 0 auto;">
+  <br /><br /><br /><br /><br />
+  <h1>Scan the QR code please</h1>
+  <br /><br />
+  <div id="qrcode" class="qc" style="width: 500px;
+  height: 500px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin:auto;"></div>
+
+  <script type="text/javascript">
+    var url = "http://123.56.181.234/index.php?seed=";
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+      width: 500,
+      height: 500,
+    });
+    function makeCode() {
+      var dt = new Date().getTime();
+      if (dt) {
+        qrcode.makeCode(url + dt.toString().slice(0, 10));
+      } else {
+        alert("ERROR: Cannot make the seed.");
+      }
+    }
+    function automake() {
+      makeCode();
+      setTimeout("automake()", 5000);
+    }
+    automake();
+  </script>
+</body>

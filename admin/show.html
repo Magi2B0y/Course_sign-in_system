@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>Video Landing Page</title>
+
+
+<link rel="stylesheet" href="css/style1.css">
+
+</head>
+<body>
+
+<section class="showcase">
+	<div class="video-container">
+		<video src="video/video.mov" autoplay muted loop></video>
+	</div>
+	<div class="content">
+		<h1>Show Absences & Suggestions</h1>
+
+		<a href="#about" class="btn">查看</a>
+	</div>
+</section>
+
+<section id="about">
+    <?
+    $sqlUserName = "bupt";
+    $db = "bupt";
+    $tb1 = "ykg2050911";
+    $tb2 = "ykg2050911_i";
+    $tb3 = "ykg2050911_s";
+    $dt = date("Ymd", time());
+    date_default_timezone_set("PRC");
+    $con = new mysqli("localhost", "bupt","4a617");
+    mysqli_query($con,"SET NAMES UTF8");
+    mysqli_query($con, "use ".$db);
+    $s1 = "select class,id,name from ".$tb2." where `".$dt."` = 0";
+    $s2 = "select suggestions from ".$tb3." where date = ".$dt;
+    echo "<h2>Date: ".date("Y-m-d",time())."</h2>";
+    echo "<h2>Class: ".$tb1."</h2>";
+    if($r1 = mysqli_query($con,$s1)){
+        echo "<h3>Absences:</h3><br>";
+        echo "<pre>Class\t\tid\t\tname<br>";
+        while ($row=mysqli_fetch_row($r1))
+        {
+            echo $row[0]."\t".$row[1]."\t".$row[2];
+            echo "<br>";
+        }
+    }
+    echo "<br>";
+    if($r2 = mysqli_query($con,$s2)){
+        echo "</pre><h3>Suggestions:</h3><br><pre>";
+        while ($row=mysqli_fetch_row($r2))
+        {
+            echo $row[0];
+            echo "<br>";
+        }
+        echo "</pre>";
+    }
+    ?>
+
+
+</section>
+
+
+</body>
+</html>
